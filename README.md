@@ -1,2 +1,2 @@
-# fruit.github.io
+# fruit.github
 毕业设计
