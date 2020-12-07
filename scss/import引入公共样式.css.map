@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": ";AAAA;;;;;;EAME",
-    "sources": [
-        "import引入公共样式.scss"
-    ],
-    "names": [],
-    "file": "import引入公共样式.css"
-}
