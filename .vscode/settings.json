@@ -14,7 +14,7 @@
   "workbench.iconTheme": "material-icon-theme",
   "git.confirmSync": false,
   "team.showWelcomeMessage": false,
-  "window.zoomLevel": 0,
+  "window.zoomLevel": -1,
   "editor.renderWhitespace": "boundary",
   "editor.cursorBlinking": "smooth",
   "editor.minimap.enabled": true,
@@ -147,5 +147,8 @@
   "editor.formatOnPaste": false,
   "vsicons.presets.hideFolders": true,
   "editor.cursorStyle": "line-thin",
-  "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }

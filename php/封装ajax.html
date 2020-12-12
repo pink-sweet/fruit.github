@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    function $ajax({method = "get",url,data,success,error}) {
+      //1.创建ajax对象
+      var xhr = null;
+      try{
+        xhr = new XMLHttpRequest();
+      }catch(error){
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+
+      //判断如果数据存在
+      if (data) {
+        data = querystring(data);
+        
+      }
+
+      if (method == "get" && data) {
+        url += "?" + data;
+      }
+
+      xhr.open(method,url,true);
+
+      if (method == "get") {
+        alert(4);
+        xhr.send();
+      }else{
+        //必须在send方法之前，去设置请求的格式
+        xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+        xhr.send(data);
+      }
+      //等待数据响应
+
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState ==4 && xhr.status == 200) {
+          /*
+              处理数据
+              回调函数
+          */
+         if(success){
+           alert(2);
+          success(xhr.responseText);
+         }
+        }else{
+          if(error){
+            error("Error: "+ xhr.status);
+          }
+          
+        }
+      }
+    }
+
+    function querystring(obj) {
+        var str = "";
+        for(var attr in obj){
+          str += attr + "=" +obj[attr] + "&";
+        }
+        return str.substring(0,str.length-1);
+    }
+
+    window.onload = function () {
+      var oGetBtn = document.getElementById("getBtn");
+      var oPostBtn = document.getElementById("postBtn");
+
+        //1.get请求
+      oGetBtn.onclick = function () {
+        alert(1);
+        $ajax({
+          url:"1.get.php",
+          data:{
+            username:"xxx",
+            age:19,
+            password:"123abc"
+          },
+          success:function(result){
+            alert(3);
+              alert("GET请求下载的数据："+ result);
+          },
+          error:function(msg){
+            alert(msg);
+          }
+        })
+      }
+
+      //2.post请求
+      oPostBtn.onclick = function () {
+        $ajax({
+          method:"post",
+          url:"1.post.php",
+          data:{
+            username:"xxx",
+            age:19,
+            password:"123abc"
+          },
+          success:function(result){
+              alert("POST请求下载的数据："+ result);
+          },
+          error:function(msg){
+            alert(msg);
+          }
+        })
+      }
+    }
+  
+  </script>
+</head>
+<body>
+  <button id="getBtn">GET请求</button>
+  <button id="postBtn">POST请求</button>
+</body>
+</html>
